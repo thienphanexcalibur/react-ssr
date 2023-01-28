@@ -1,6 +1,6 @@
 {
   "scripts": {
-    "compile": "node -r ./register.js",
+    "compile": "node -r ./register.js server.js",
     "build:fe": "vite build"
   },
   "devDependencies": {

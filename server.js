@@ -7,8 +7,7 @@ import App from './frontend/app.jsx'
 import path from 'path'
 
 const app = express()
-
-app.use(express.static(path.resolve(__dirname, "./frontend/dist/assets")))
+app.use('/static', express.static(path.join(__dirname, "./frontend/dist/assets")))
 
 
 const htmlTemplate = function(root) {
@@ -19,7 +18,7 @@ const htmlTemplate = function(root) {
     </head>
     <body>
       <div id="app">${root}</div>
-      <script src="index.js"></script>
+      <script type="text/javascript" src="static/index.js"></script>
     </body>
   </html>
   `
@@ -39,12 +38,11 @@ app.get("/", (req, res) => {
     //}
   //})
   const root = ReactDOMServer.renderToString(<App />)
-  res.setHeader('Content-Type', 'text/html')
-  res.end(htmlTemplate(root))
+  res.send(htmlTemplate(root))
 })
 
 
-const PORT = 3000;
+const PORT = 4000;
 app.listen(PORT, () => {
   console.log('SSR server start at ', PORT);
 })
